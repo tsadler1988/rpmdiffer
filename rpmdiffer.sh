@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 if [ "$#" -ne 3 ]; then
 	echo "Usage: rpmdiff <RPM NAME> <REPO1> <REPO2>"
 	exit 1

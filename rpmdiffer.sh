@@ -2,6 +2,7 @@
 
 if [ "$#" -ne 3 ]; then
 	echo "Usage: rpmdiff <RPM NAME> <REPO1> <REPO2>"
+	exit 1
 fi
 
 RPM_NAME="$1"

@@ -48,7 +48,7 @@ find $REPO_1 -name "*precert.json" -type f -delete
 echo "Removing precert configs from $REPO_2"
 find $REPO_2 -name "*precert.json" -type f -delete
 
-diff -r $REPO_1 $REPO_2 > rpmdiff
+diff -r $REPO_1 $REPO_2 > rpmdiff || :
 
 rm -rf tmp/
 rm -rf "$REPO_1"

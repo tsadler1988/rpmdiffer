@@ -15,6 +15,8 @@ echo "RPM NAME = $RPM_NAME"
 echo "REPO 1 = $REPO_1"
 echo "REPO 2 = $REPO_2"
 
+echo "Removing any previously filled folders..."
+rm -fr tmp $REPO_1 $REPO_2
 mkdir tmp
 cd tmp
 pwd
@@ -40,6 +42,11 @@ rpm2cpio "../tmp/$RPM_2" | cpio -idmv
 
 cd ../
 ls
+
+echo "Removing precert configs from $REPO_1"
+find $REPO_1 -name "*precert.json" -type f -delete
+echo "Removing precert configs from $REPO_2"
+find $REPO_2 -name "*precert.json" -type f -delete
 
 diff -r $REPO_1 $REPO_2 > rpmdiff
 

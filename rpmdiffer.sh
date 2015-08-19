@@ -53,7 +53,7 @@ if [ -n "$4" ]; then
 	find $REPO_2 -name "*$EXCLUDE*" -type f -delete
 fi
 
-diff -r $REPO_1 $REPO_2 > rpmdiff || :
+diff -r $REPO_1 $REPO_2 > rpmdiff.diff || :
 
 rm -rf tmp/
 rm -rf "$REPO_1"

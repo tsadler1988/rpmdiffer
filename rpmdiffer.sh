@@ -2,18 +2,22 @@
 
 set -e
 
-if [ "$#" -ne 3 ]; then
-	echo "Usage: rpmdiff <RPM NAME> <REPO1> <REPO2>"
+if [ "$#" -lt 3 ] || [ "$#" -gt 4 ]; then
+	echo "Usage: rpmdiffer <RPM NAME> <REPO1> <REPO2> [<EXCLUDE>]"
 	exit 1
 fi
 
 RPM_NAME="$1"
 REPO_1="$2"
 REPO_2="$3"
+EXCLUDE="$4"
 
 echo "RPM NAME = $RPM_NAME"
 echo "REPO 1 = $REPO_1"
 echo "REPO 2 = $REPO_2"
+if [ -n "$4" ]; then 
+	echo "Excluding files containing $EXCLUDE"
+fi
 
 echo "Removing any previously filled folders..."
 rm -fr tmp $REPO_1 $REPO_2
@@ -43,10 +47,11 @@ rpm2cpio "../tmp/$RPM_2" | cpio -idmv
 cd ../
 ls
 
-echo "Removing precert configs from $REPO_1"
-find $REPO_1 -name "*precert.json" -type f -delete
-echo "Removing precert configs from $REPO_2"
-find $REPO_2 -name "*precert.json" -type f -delete
+if [ -n "$4" ]; then 
+	echo "Exlcuding files containing $EXCLUDE"
+	find $REPO_1 -name "*$EXCLUDE*" -type f -delete
+	find $REPO_2 -name "*$EXCLUDE*" -type f -delete
+fi
 
 diff -r $REPO_1 $REPO_2 > rpmdiff || :
 

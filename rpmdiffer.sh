@@ -16,7 +16,7 @@ echo "RPM NAME = $RPM_NAME"
 echo "REPO 1 = $REPO_1"
 echo "REPO 2 = $REPO_2"
 if [ -n "$4" ]; then 
-	echo "Excluding files containing $EXCLUDE"
+	echo "Excluding files containing \"$EXCLUDE\""
 fi
 
 echo "Removing any previously filled folders..."

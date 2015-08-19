@@ -48,7 +48,7 @@ cd ../
 ls
 
 if [ -n "$4" ]; then 
-	echo "Exlcuding files containing $EXCLUDE"
+	echo "Exlcuding files containing \"$EXCLUDE\""
 	find $REPO_1 -name "*$EXCLUDE*" -type f -delete
 	find $REPO_2 -name "*$EXCLUDE*" -type f -delete
 fi
